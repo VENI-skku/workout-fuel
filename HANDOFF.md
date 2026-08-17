@@ -21,7 +21,7 @@
 | 배포 URL | https://skku137ai.netlify.app/ |  |
 | GitHub repo | https://github.com/VENI-skku/workout-fuel |  |
 | Netlify 사이트 | skku137ai |  |
-| GA4 측정 ID | G-__________ |  |
+| GA4 측정 ID | G-89F38STC0C |  |
 | GA4 속성 접근권 | (승주 계정 추가함? Y/N) |  |
 | Clarity(선택) | ____________ |  |
 

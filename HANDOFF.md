@@ -20,9 +20,9 @@
 |---|---|---|
 | 배포 URL | https://skku137ai.netlify.app/ | 유담(VENI-skku) |
 | GitHub repo | https://github.com/VENI-skku/workout-fuel | 유담(VENI-skku), 승주(SeungJu-Lee0422, Admin 초대됨), 유나(yunaa-03, Admin 초대됨), 용준(Etchyd, Admin 초대됨) |
-| Netlify 사이트 | skku137ai | 유담(VENI-skku) — 승주·유나·용준 팀 멤버 초대 예정 |
+| Netlify 사이트 | skku137ai | 유담(VENI-skku)만 접근 — 팀원 추가는 유료 플랜 필요해서 보류. GitHub push하면 자동 재배포되니 대부분 상황에서 문제없음. 빌드 로그·사이트 설정 확인 필요하면 유담에게 요청 |
 | GA4 측정 ID | G-89F38STC0C | 유담 |
-| GA4 속성 접근권 | 승주(l31433077@gmail.com), 유나(yuna8670@gmail.com), 용준(artyongjun8@gmail.com) 추가 예정(브라우저에서 직접 진행) | 유담 |
+| GA4 속성 접근권 | 승주(l31433077@gmail.com), 유나(yuna8670@gmail.com), 용준(artyongjun8@gmail.com) 모두 관리자로 추가 완료 (Y) | 유담 |
 | Clarity(선택) | ____________ |  |
 
 > GA4·Netlify 로그인 주인을 꼭 적어둘 것. 다음 사람이 접근 못 하면 여기서 막힘.

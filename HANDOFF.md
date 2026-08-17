@@ -18,11 +18,11 @@
 
 | 항목 | 값 | 로그인 주인 |
 |---|---|---|
-| 배포 URL | https://skku137ai.netlify.app/ |  |
-| GitHub repo | https://github.com/VENI-skku/workout-fuel |  |
-| Netlify 사이트 | skku137ai |  |
-| GA4 측정 ID | G-89F38STC0C |  |
-| GA4 속성 접근권 | (승주 계정 추가함? Y/N) |  |
+| 배포 URL | https://skku137ai.netlify.app/ | 유담(VENI-skku) |
+| GitHub repo | https://github.com/VENI-skku/workout-fuel | 유담(VENI-skku), 승주(SeungJu-Lee0422, Admin 초대됨), 유나(yunaa-03, Admin 초대됨) |
+| Netlify 사이트 | skku137ai | 유담(VENI-skku) — 승주·유나 팀 멤버 초대 예정 |
+| GA4 측정 ID | G-89F38STC0C | 유담 |
+| GA4 속성 접근권 | 승주(l31433077@gmail.com), 유나(yuna8670@gmail.com) 추가 예정(브라우저에서 직접 진행) | 유담 |
 | Clarity(선택) | ____________ |  |
 
 > GA4·Netlify 로그인 주인을 꼭 적어둘 것. 다음 사람이 접근 못 하면 여기서 막힘.

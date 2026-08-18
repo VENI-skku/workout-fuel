@@ -3,10 +3,36 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
+<<<<<<< HEAD
 <title>소모 칼로리 맞춤 식단</title>
 <script>
   window.APP_VERSION = "mvp-2.0";
 </script>
+=======
+<title>칼로리 연소 계산기</title>
+
+<!-- ===== 구글 애널리틱스 GA4 (필수) =====
+     아래 측정 ID(G-로 시작) 두 군데를 네 GA4 값으로 바꿔줘 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-89F38STC0C"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-89F38STC0C');
+</script>
+
+<!-- ===== Microsoft Clarity (선택: 세션 녹화·히트맵) =====
+     쓸 거면 YOUR_CLARITY_ID 를 네 Clarity 프로젝트 ID로 바꾸고,
+     안 쓸 거면 이 스크립트 블록 전체를 지워도 돼 -->
+<script type="text/javascript">
+  (function(c,l,a,r,i,t,y){
+      c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+      t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+      y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+  })(window, document, "clarity", "script", "YOUR_CLARITY_ID");
+</script>
+
+>>>>>>> 3d1f2f0a2106ebc93dfa9299d04d8ddcab6b6728
 <style>
   :root {
     --bg0: #121212;
@@ -28,7 +54,10 @@
     --inset-border: rgb(18, 18, 18) 0px 1px 0px, rgb(124, 124, 124) 0px 0px 0px 1px inset;
     --font: "Helvetica Neue", Helvetica, Arial, "Malgun Gothic", "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
   }
+<<<<<<< HEAD
 
+=======
+>>>>>>> 3d1f2f0a2106ebc93dfa9299d04d8ddcab6b6728
   * { box-sizing: border-box; }
   body {
     margin: 0;
@@ -42,7 +71,10 @@
     margin: 0 auto;
     padding: 40px 20px 96px;
   }
+<<<<<<< HEAD
 
+=======
+>>>>>>> 3d1f2f0a2106ebc93dfa9299d04d8ddcab6b6728
   header { margin-bottom: 24px; }
   .eyebrow {
     font-size: 12px;
@@ -64,7 +96,10 @@
     font-size: 14px;
     max-width: 54ch;
   }
+<<<<<<< HEAD
 
+=======
+>>>>>>> 3d1f2f0a2106ebc93dfa9299d04d8ddcab6b6728
   .panel {
     background: var(--bg1);
     border-radius: 8px;
@@ -72,7 +107,10 @@
     box-shadow: var(--shadow-medium);
   }
   .panel + .panel { margin-top: 16px; }
+<<<<<<< HEAD
 
+=======
+>>>>>>> 3d1f2f0a2106ebc93dfa9299d04d8ddcab6b6728
   .field-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -104,7 +142,10 @@
     outline: 1px solid var(--text);
     outline-offset: 2px;
   }
+<<<<<<< HEAD
 
+=======
+>>>>>>> 3d1f2f0a2106ebc93dfa9299d04d8ddcab6b6728
   .result {
     margin-top: 20px;
     display: flex;
@@ -138,7 +179,10 @@
     margin-left: 6px;
   }
   .met-note { font-size: 12px; color: var(--text-secondary); max-width: 30ch; text-align: right; }
+<<<<<<< HEAD
 
+=======
+>>>>>>> 3d1f2f0a2106ebc93dfa9299d04d8ddcab6b6728
   .stat-row {
     margin-top: 14px;
     display: grid;
@@ -170,7 +214,10 @@
   .stat.tier-low .n { color: var(--info); }
   .stat.tier-mid .n { color: var(--warning); }
   .stat.tier-high .n { color: var(--negative); }
+<<<<<<< HEAD
 
+=======
+>>>>>>> 3d1f2f0a2106ebc93dfa9299d04d8ddcab6b6728
   section.recs { margin-top: 28px; }
   .recs h2 {
     font-size: 12px;
@@ -181,26 +228,42 @@
     margin: 0 0 4px;
   }
   .recs p.hint { color: var(--text-secondary); font-size: 14px; margin: 0 0 14px; }
+<<<<<<< HEAD
 
+=======
+>>>>>>> 3d1f2f0a2106ebc93dfa9299d04d8ddcab6b6728
   .cards {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 10px;
   }
+<<<<<<< HEAD
   .card {
+=======
+  a.card {
+>>>>>>> 3d1f2f0a2106ebc93dfa9299d04d8ddcab6b6728
     display: flex;
     flex-direction: column;
     gap: 10px;
     background: var(--bg1);
     border-radius: 8px;
     padding: 16px;
+<<<<<<< HEAD
+=======
+    text-decoration: none;
+>>>>>>> 3d1f2f0a2106ebc93dfa9299d04d8ddcab6b6728
     color: var(--text);
     box-shadow: var(--shadow-medium);
     transition: background 0.15s ease, transform 0.15s ease;
   }
+<<<<<<< HEAD
   .card:hover { background: var(--bg3); transform: translateY(-2px); }
   @media (prefers-reduced-motion: reduce) { .card { transition: none; } .card:hover { transform: none; } }
 
+=======
+  a.card:hover { background: var(--bg3); transform: translateY(-2px); }
+  @media (prefers-reduced-motion: reduce) { a.card { transition: none; } a.card:hover { transform: none; } }
+>>>>>>> 3d1f2f0a2106ebc93dfa9299d04d8ddcab6b6728
   .card-tag {
     align-self: flex-start;
     font-size: 10.5px;
@@ -213,6 +276,7 @@
   }
   .card h3 { font-size: 16px; font-weight: 700; margin: 0; color: var(--text-bright); }
   .card p { font-size: 13px; font-weight: 400; color: var(--text-secondary); margin: 0; flex: 1; }
+<<<<<<< HEAD
   .cta-group {
     display: grid;
     grid-template-columns: 1fr;
@@ -220,12 +284,16 @@
     margin-top: 8px;
   }
   .shop-button {
+=======
+  .card .cta {
+>>>>>>> 3d1f2f0a2106ebc93dfa9299d04d8ddcab6b6728
     display: inline-flex;
     align-items: center;
     justify-content: center;
     gap: 6px;
     font-size: 12px;
     font-weight: 700;
+<<<<<<< HEAD
     letter-spacing: 0.4px;
     text-decoration: none;
     border-radius: 9999px;
@@ -243,6 +311,17 @@
     background: var(--accent);
   }
 
+=======
+    letter-spacing: 1.4px;
+    text-transform: uppercase;
+    color: var(--text);
+    background: var(--bg2);
+    border-radius: 9999px;
+    padding: 8px 16px;
+  }
+  .card .cta svg { width: 12px; height: 12px; }
+  a.card:hover .cta { background: var(--accent); color: var(--bg0); }
+>>>>>>> 3d1f2f0a2106ebc93dfa9299d04d8ddcab6b6728
   footer {
     margin-top: 24px;
     font-size: 11px;
@@ -253,6 +332,7 @@
 </style>
 </head>
 <body>
+<<<<<<< HEAD
 
 <div class="wrap">
   <header>
@@ -261,6 +341,14 @@
     <p class="sub">운동 후 오늘의 소모 칼로리를 기반으로 간편식까지 바로 연결해 드려요. 쿠팡과 마켓컬리 중 원하는 구매 방식으로 선택해 보세요.</p>
   </header>
 
+=======
+<div class="wrap">
+  <header>
+    <div class="eyebrow">Workout Fuel Calculator</div>
+    <h1>운동하고, 태운 만큼 채우기</h1>
+    <p class="sub">운동 종류와 시간을 입력하면 소모 칼로리를 계산하고, 회복에 맞는 간편식 카테고리를 추천해줘요. 카드를 누르면 쿠팡 검색 결과로 이동합니다.</p>
+  </header>
+>>>>>>> 3d1f2f0a2106ebc93dfa9299d04d8ddcab6b6728
   <div class="panel">
     <div class="field-grid">
       <div class="field">
@@ -280,7 +368,10 @@
         <input type="number" id="height" min="120" max="220" value="170" />
       </div>
     </div>
+<<<<<<< HEAD
 
+=======
+>>>>>>> 3d1f2f0a2106ebc93dfa9299d04d8ddcab6b6728
     <div class="result">
       <div>
         <div class="burn-label">예상 소모 칼로리</div>
@@ -288,7 +379,10 @@
       </div>
       <div class="met-note" id="metNote"></div>
     </div>
+<<<<<<< HEAD
 
+=======
+>>>>>>> 3d1f2f0a2106ebc93dfa9299d04d8ddcab6b6728
     <div class="stat-row">
       <div class="stat">
         <div class="n" id="statProtein">0g</div>
@@ -308,17 +402,32 @@
       </div>
     </div>
   </div>
+<<<<<<< HEAD
 
+=======
+>>>>>>> 3d1f2f0a2106ebc93dfa9299d04d8ddcab6b6728
   <section class="recs">
     <h2>추천 간편식 카테고리</h2>
     <p class="hint" id="recHint"></p>
     <div class="cards" id="cards"></div>
   </section>
+<<<<<<< HEAD
 
   <footer>MET 계수 기반 추정치이며 실제 소모량은 체력·강도·환경에 따라 달라질 수 있어요. 추천은 특정 상품을 보장하는 것이 아니라, 오늘 운동량과 목표 단백질·탄수화물에 맞는 식단을 빠르게 찾는 도구로 사용해 주세요. 쿠팡은 대용량 간편식 쟁여두기용, 마켓컬리는 맞춤 한끼용으로 각각 활용하기 좋습니다.</footer>
 </div>
 
 <script>
+=======
+  <footer>MET 계수 기반 추정치이며 실제 소모량은 체력·강도·환경에 따라 달라질 수 있어요. 카드는 특정 상품이 아닌, 목표 단백질·탄수화물 그램 수를 포함한 쿠팡 검색 키워드로 연결돼요. 쿠팡에는 영양 성분으로 상품을 정렬하는 공식 기능이 없어, 검색어 매칭을 통해 근접한 상품이 상위에 뜨도록 유도하는 방식이며 정확한 성분은 상품 상세에서 꼭 확인하세요.</footer>
+</div>
+<script>
+  // ===== 인수인계 메모 (유나: MVP 재배포 담당) =====
+  // MVP 버전을 올릴 때 아래 APP_VERSION만 "mvp-2.0"으로 바꾸세요.
+  // 그러면 GA4 데이터에서 1.0/2.0이 자동으로 구분돼 지표 비교가 쉬워집니다.
+  // 나머지 인수인계 내용은 HANDOFF.md 참고.
+  var APP_VERSION = "mvp-1.0";
+
+>>>>>>> 3d1f2f0a2106ebc93dfa9299d04d8ddcab6b6728
   var EXERCISES = [
     { key: "walk", label: "걷기 (보통 속도)", met: 3.5 },
     { key: "fastwalk", label: "빠르게 걷기", met: 4.5 },
@@ -333,7 +442,10 @@
     { key: "hike", label: "등산", met: 6.5 },
     { key: "badminton", label: "배드민턴 / 탁구", met: 5.5 }
   ];
+<<<<<<< HEAD
 
+=======
+>>>>>>> 3d1f2f0a2106ebc93dfa9299d04d8ddcab6b6728
   var exerciseSel = document.getElementById("exercise");
   EXERCISES.forEach(function (ex) {
     var opt = document.createElement("option");
@@ -342,7 +454,10 @@
     exerciseSel.appendChild(opt);
   });
   exerciseSel.value = "run";
+<<<<<<< HEAD
 
+=======
+>>>>>>> 3d1f2f0a2106ebc93dfa9299d04d8ddcab6b6728
   var durationInput = document.getElementById("duration");
   var weightInput = document.getElementById("weight");
   var heightInput = document.getElementById("height");
@@ -357,12 +472,22 @@
   var recHint = document.getElementById("recHint");
   var cardsEl = document.getElementById("cards");
 
+<<<<<<< HEAD
+=======
+  // KPI 추적 헬퍼: GA4 / Clarity 로 이벤트 전송 (설정 안 돼 있으면 조용히 무시)
+  function trackEvent(name, params) {
+    if (typeof gtag === "function") { gtag("event", name, params || {}); }
+    if (typeof clarity === "function") { clarity("event", name); }
+  }
+
+>>>>>>> 3d1f2f0a2106ebc93dfa9299d04d8ddcab6b6728
   function bmiCategory(bmi) {
     if (bmi < 18.5) return "저체중";
     if (bmi < 23) return "정상";
     if (bmi < 25) return "과체중";
     return "비만";
   }
+<<<<<<< HEAD
 
   function coupangSearchUrl(query) {
     return "https://www.coupang.com/np/search?component=&sorter=scoreDesc&q=" + encodeURIComponent(query);
@@ -405,11 +530,25 @@
     }
   }
 
+=======
+  function coupangSearchUrl(query) {
+    // 관련도순(기본 랭킹) 검색 — 검색어에 목표 그램 수를 넣어
+    // 쿠팡 자체 랭킹이 해당 수치에 가까운 상품 표기를 우선 매칭하도록 유도
+    return "https://www.coupang.com/np/search?component=&sorter=scoreDesc&q=" + encodeURIComponent(query);
+  }
+  function roundToStep(n, step) {
+    return Math.round(n / step) * step;
+  }
+  function externalIcon() {
+    return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"/><path d="M8 7h9v9"/></svg>';
+  }
+>>>>>>> 3d1f2f0a2106ebc93dfa9299d04d8ddcab6b6728
   function recommendationsFor(kcal) {
     var tier, tierLabel, proteinG, carbG, hint;
     if (kcal < 200) {
       tier = "low"; tierLabel = "가벼운 보충";
       proteinG = 12; carbG = 20;
+<<<<<<< HEAD
       hint = "가볍게 태웠다면, 부담 없는 저칼로리 간편식으로 마무리하는 게 좋아요.";
     } else if (kcal < 500) {
       tier = "mid"; tierLabel = "균형 회복";
@@ -438,10 +577,37 @@
         desc: "단백질 " + proteinG + "g, 탄수화물 " + carbG + "g를 고려해 한 끼를 보완하는 추천입니다.",
         coupangQuery: (tier === "high" ? "고단백 고탄수화물 도시락 단백질 " : "저칼로리 다이어트 도시락 단백질 ") + pTarget + "g 탄수화물 " + cTarget + "g",
         kurlyQuery: (tier === "high" ? "고단백 도시락 단백질 " : "균형 도시락 단백질 ") + pTarget + "g 탄수화물 " + cTarget + "g"
+=======
+      hint = "가볍게 태운 만큼, 부담 없는 저칼로리 스낵이면 충분해요.";
+    } else if (kcal < 500) {
+      tier = "mid"; tierLabel = "균형 회복";
+      proteinG = 22; carbG = 45;
+      hint = "적당히 태웠어요. 단백질과 탄수화물이 고루 든 한 끼가 좋아요.";
+    } else {
+      tier = "high"; tierLabel = "적극 회복";
+      proteinG = 32; carbG = 70;
+      hint = "많이 태웠네요! 근육 회복을 위한 고단백·고탄수 식단을 챙겨보세요.";
+    }
+    var pTarget = roundToStep(proteinG, 5);
+    var cTarget = roundToStep(carbG, 5);
+    var cards = [
+      {
+        tag: "단백질 " + pTarget + "g대",
+        title: tier === "low" ? "닭가슴살 소포장" : "고단백 닭가슴살",
+        desc: "목표 단백질 " + proteinG + "g에 근접한 상품이 먼저 보이도록 \"단백질 " + pTarget + "g\"를 검색어에 포함했어요.",
+        query: (tier === "low" ? "닭가슴살 소포장 단백질 " : "고단백 닭가슴살 단백질 ") + pTarget + "g"
+      },
+      {
+        tag: "단백질 " + pTarget + "g · 탄수 " + cTarget + "g",
+        title: tier === "high" ? "고단백 고탄수 도시락" : "저칼로리 균형 도시락",
+        desc: "단백질 " + proteinG + "g, 탄수화물 " + carbG + "g 목표에 맞춰 두 수치를 함께 검색어에 넣었어요.",
+        query: (tier === "high" ? "고단백 고탄수화물 도시락 단백질 " : "저칼로리 다이어트 도시락 단백질 ") + pTarget + "g 탄수화물 " + cTarget + "g"
+>>>>>>> 3d1f2f0a2106ebc93dfa9299d04d8ddcab6b6728
       },
       {
         tag: "단백질 " + pTarget + "g대",
         title: tier === "low" ? "저칼로리 단백질 음료" : "프로틴 쉐이크",
+<<<<<<< HEAD
         desc: "식사 전에 빠르게 보충할 수 있는 액상 단백질로 1회 보충용으로 적합해요.",
         coupangQuery: (tier === "low" ? "저칼로리 프로틴 음료 단백질 " : "프로틴 쉐이크 단백질 ") + pTarget + "g",
         kurlyQuery: (tier === "low" ? "저칼로리 프로틴 음료 " : "프로틴 쉐이크 ") + pTarget + "g"
@@ -451,11 +617,20 @@
     return { tier: tier, tierLabel: tierLabel, proteinG: proteinG, carbG: carbG, hint: hint, cards: cards };
   }
 
+=======
+        desc: "흡수 빠른 액상 단백질 중, 목표 단백질 " + proteinG + "g에 가까운 제품이 우선 노출되도록 검색했어요.",
+        query: (tier === "low" ? "저칼로리 프로틴 음료 단백질 " : "프로틴 쉐이크 단백질 ") + pTarget + "g"
+      }
+    ];
+    return { tier: tier, tierLabel: tierLabel, proteinG: proteinG, carbG: carbG, hint: hint, cards: cards };
+  }
+>>>>>>> 3d1f2f0a2106ebc93dfa9299d04d8ddcab6b6728
   function render() {
     var ex = EXERCISES.filter(function (e) { return e.key === exerciseSel.value; })[0];
     var minutes = Math.max(1, Math.min(600, Number(durationInput.value) || 0));
     var weight = Math.max(30, Math.min(200, Number(weightInput.value) || 0));
     var height = Math.max(120, Math.min(220, Number(heightInput.value) || 0));
+<<<<<<< HEAD
 
     var hours = minutes / 60;
     var kcal = ex.met * weight * hours;
@@ -464,17 +639,28 @@
     burnNumberEl.innerHTML = kcalRounded.toLocaleString("ko-KR") + "<span>kcal</span>";
     metNoteEl.textContent = ex.label + " · MET " + ex.met + " · " + minutes + "분 · " + weight + "kg 기준";
 
+=======
+    var hours = minutes / 60;
+    var kcal = ex.met * weight * hours;
+    var kcalRounded = Math.round(kcal);
+    burnNumberEl.innerHTML = kcalRounded.toLocaleString("ko-KR") + "<span>kcal</span>";
+    metNoteEl.textContent = ex.label + " · MET " + ex.met + " · " + minutes + "분 · " + weight + "kg 기준";
+>>>>>>> 3d1f2f0a2106ebc93dfa9299d04d8ddcab6b6728
     var heightM = height / 100;
     var bmi = weight / (heightM * heightM);
     statBmi.textContent = bmi.toFixed(1);
     statBmiLabel.textContent = "BMI · " + bmiCategory(bmi);
+<<<<<<< HEAD
 
+=======
+>>>>>>> 3d1f2f0a2106ebc93dfa9299d04d8ddcab6b6728
     var rec = recommendationsFor(kcalRounded);
     statProtein.textContent = rec.proteinG + "g";
     statCarb.textContent = rec.carbG + "g";
     statTier.textContent = rec.tierLabel;
     statTierBox.className = "stat tier-" + rec.tier;
     recHint.textContent = rec.hint;
+<<<<<<< HEAD
 
     cardsEl.innerHTML = "";
     rec.cards.forEach(function (c) {
@@ -499,6 +685,33 @@
     });
   }
 
+=======
+    cardsEl.innerHTML = "";
+    rec.cards.forEach(function (c) {
+      var a = document.createElement("a");
+      a.className = "card";
+      a.href = coupangSearchUrl(c.query);
+      a.target = "_blank";
+      a.rel = "noopener noreferrer";
+      a.innerHTML =
+        '<span class="card-tag">' + c.tag + '</span>' +
+        '<h3>' + c.title + '</h3>' +
+        '<p>' + c.desc + '</p>' +
+        '<span class="cta">쿠팡에서 검색 ' + externalIcon() + '</span>';
+      // ===== 핵심 KPI: 추천 클릭(전환) 이벤트 =====
+      a.addEventListener("click", function () {
+        trackEvent("recommend_click", {
+          exercise: ex.label,
+          kcal: kcalRounded,
+          tier: rec.tierLabel,
+          product: c.title,
+          mvp_version: APP_VERSION
+        });
+      });
+      cardsEl.appendChild(a);
+    });
+  }
+>>>>>>> 3d1f2f0a2106ebc93dfa9299d04d8ddcab6b6728
   exerciseSel.addEventListener("change", render);
   durationInput.addEventListener("input", render);
   weightInput.addEventListener("input", render);

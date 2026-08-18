@@ -1,0 +1,509 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>소모 칼로리 맞춤 식단</title>
+<script>
+  window.APP_VERSION = "mvp-2.0";
+</script>
+<style>
+  :root {
+    --bg0: #121212;
+    --bg1: #181818;
+    --bg2: #1f1f1f;
+    --bg3: #252525;
+    --text: #ffffff;
+    --text-bright: #fdfdfd;
+    --text-secondary: #b3b3b3;
+    --accent: #1ed760;
+    --accent-border: #1db954;
+    --border: #4d4d4d;
+    --border-light: #7c7c7c;
+    --negative: #f3727f;
+    --warning: #ffa42b;
+    --info: #539df5;
+    --shadow-heavy: rgba(0, 0, 0, 0.5) 0px 8px 24px;
+    --shadow-medium: rgba(0, 0, 0, 0.3) 0px 8px 8px;
+    --inset-border: rgb(18, 18, 18) 0px 1px 0px, rgb(124, 124, 124) 0px 0px 0px 1px inset;
+    --font: "Helvetica Neue", Helvetica, Arial, "Malgun Gothic", "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg0);
+    color: var(--text);
+    font-family: var(--font);
+    line-height: 1.3;
+  }
+  .wrap {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 40px 20px 96px;
+  }
+
+  header { margin-bottom: 24px; }
+  .eyebrow {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1.6px;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+  h1 {
+    font-family: var(--font);
+    font-weight: 700;
+    font-size: 24px;
+    line-height: normal;
+    margin: 8px 0 6px;
+    color: var(--text-bright);
+  }
+  .sub {
+    color: var(--text-secondary);
+    font-size: 14px;
+    max-width: 54ch;
+  }
+
+  .panel {
+    background: var(--bg1);
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: var(--shadow-medium);
+  }
+  .panel + .panel { margin-top: 16px; }
+
+  .field-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+  .field { display: flex; flex-direction: column; gap: 6px; }
+  label {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1.4px;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+  }
+  select, input[type="number"] {
+    font: inherit;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--text);
+    background: var(--bg2);
+    border: none;
+    border-radius: 6px;
+    padding: 12px 14px;
+    box-shadow: var(--inset-border);
+    -webkit-appearance: none;
+    appearance: none;
+  }
+  select { cursor: pointer; }
+  select:focus-visible, input:focus-visible, a.card:focus-visible {
+    outline: 1px solid var(--text);
+    outline-offset: 2px;
+  }
+
+  .result {
+    margin-top: 20px;
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+    padding-top: 18px;
+    border-top: 1px solid var(--bg3);
+  }
+  .burn-label {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1.4px;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+  }
+  .burn-number {
+    font-variant-numeric: tabular-nums;
+    font-size: 48px;
+    font-weight: 700;
+    color: var(--accent);
+    line-height: 1;
+  }
+  .burn-number span {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--text-secondary);
+    letter-spacing: 1.4px;
+    text-transform: uppercase;
+    margin-left: 6px;
+  }
+  .met-note { font-size: 12px; color: var(--text-secondary); max-width: 30ch; text-align: right; }
+
+  .stat-row {
+    margin-top: 14px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+  }
+  @media (max-width: 480px) {
+    .stat-row { grid-template-columns: repeat(2, 1fr); }
+  }
+  .stat {
+    background: var(--bg2);
+    border-radius: 6px;
+    padding: 12px 14px;
+  }
+  .stat .n {
+    font-variant-numeric: tabular-nums;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--text-bright);
+  }
+  .stat .l {
+    font-size: 10.5px;
+    font-weight: 600;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-top: 2px;
+  }
+  .stat.tier-low .n { color: var(--info); }
+  .stat.tier-mid .n { color: var(--warning); }
+  .stat.tier-high .n { color: var(--negative); }
+
+  section.recs { margin-top: 28px; }
+  .recs h2 {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1.4px;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+    margin: 0 0 4px;
+  }
+  .recs p.hint { color: var(--text-secondary); font-size: 14px; margin: 0 0 14px; }
+
+  .cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 10px;
+  }
+  .card {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    background: var(--bg1);
+    border-radius: 8px;
+    padding: 16px;
+    color: var(--text);
+    box-shadow: var(--shadow-medium);
+    transition: background 0.15s ease, transform 0.15s ease;
+  }
+  .card:hover { background: var(--bg3); transform: translateY(-2px); }
+  @media (prefers-reduced-motion: reduce) { .card { transition: none; } .card:hover { transform: none; } }
+
+  .card-tag {
+    align-self: flex-start;
+    font-size: 10.5px;
+    font-weight: 700;
+    letter-spacing: 0.8px;
+    color: var(--bg0);
+    background: var(--accent);
+    padding: 3px 10px;
+    border-radius: 9999px;
+  }
+  .card h3 { font-size: 16px; font-weight: 700; margin: 0; color: var(--text-bright); }
+  .card p { font-size: 13px; font-weight: 400; color: var(--text-secondary); margin: 0; flex: 1; }
+  .cta-group {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 8px;
+    margin-top: 8px;
+  }
+  .shop-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.4px;
+    text-decoration: none;
+    border-radius: 9999px;
+    padding: 10px 14px;
+    transition: opacity 0.15s ease, transform 0.15s ease;
+  }
+  .shop-button:hover { opacity: 0.95; transform: translateY(-1px); }
+  .shop-button svg { width: 12px; height: 12px; }
+  .shop-button.coupang {
+    color: var(--text);
+    background: var(--bg2);
+  }
+  .shop-button.kurly {
+    color: var(--bg0);
+    background: var(--accent);
+  }
+
+  footer {
+    margin-top: 24px;
+    font-size: 11px;
+    font-weight: 400;
+    color: var(--text-secondary);
+    line-height: 1.5;
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <header>
+    <div class="eyebrow">Workout Fuel</div>
+    <h1>소모 칼로리 맞춤 식단</h1>
+    <p class="sub">운동 후 오늘의 소모 칼로리를 기반으로 간편식까지 바로 연결해 드려요. 쿠팡과 마켓컬리 중 원하는 구매 방식으로 선택해 보세요.</p>
+  </header>
+
+  <div class="panel">
+    <div class="field-grid">
+      <div class="field">
+        <label for="exercise">운동 종류</label>
+        <select id="exercise"></select>
+      </div>
+      <div class="field">
+        <label for="duration">운동 시간 (분)</label>
+        <input type="number" id="duration" min="1" max="600" value="40" />
+      </div>
+      <div class="field">
+        <label for="weight">체중 (kg)</label>
+        <input type="number" id="weight" min="30" max="200" value="65" />
+      </div>
+      <div class="field">
+        <label for="height">키 (cm)</label>
+        <input type="number" id="height" min="120" max="220" value="170" />
+      </div>
+    </div>
+
+    <div class="result">
+      <div>
+        <div class="burn-label">예상 소모 칼로리</div>
+        <div class="burn-number" id="burnNumber">0<span>kcal</span></div>
+      </div>
+      <div class="met-note" id="metNote"></div>
+    </div>
+
+    <div class="stat-row">
+      <div class="stat">
+        <div class="n" id="statProtein">0g</div>
+        <div class="l">권장 단백질</div>
+      </div>
+      <div class="stat">
+        <div class="n" id="statCarb">0g</div>
+        <div class="l">권장 탄수화물</div>
+      </div>
+      <div class="stat" id="statTierBox">
+        <div class="n" id="statTier">-</div>
+        <div class="l">회복 강도</div>
+      </div>
+      <div class="stat">
+        <div class="n" id="statBmi">0</div>
+        <div class="l" id="statBmiLabel">BMI</div>
+      </div>
+    </div>
+  </div>
+
+  <section class="recs">
+    <h2>추천 간편식 카테고리</h2>
+    <p class="hint" id="recHint"></p>
+    <div class="cards" id="cards"></div>
+  </section>
+
+  <footer>MET 계수 기반 추정치이며 실제 소모량은 체력·강도·환경에 따라 달라질 수 있어요. 추천은 특정 상품을 보장하는 것이 아니라, 오늘 운동량과 목표 단백질·탄수화물에 맞는 식단을 빠르게 찾는 도구로 사용해 주세요. 쿠팡은 대용량 간편식 쟁여두기용, 마켓컬리는 맞춤 한끼용으로 각각 활용하기 좋습니다.</footer>
+</div>
+
+<script>
+  var EXERCISES = [
+    { key: "walk", label: "걷기 (보통 속도)", met: 3.5 },
+    { key: "fastwalk", label: "빠르게 걷기", met: 4.5 },
+    { key: "run", label: "달리기 (조깅)", met: 8.0 },
+    { key: "fastrun", label: "달리기 (빠르게)", met: 11.5 },
+    { key: "cycle", label: "자전거", met: 7.5 },
+    { key: "swim", label: "수영", met: 8.3 },
+    { key: "weight", label: "웨이트 트레이닝", met: 5.0 },
+    { key: "hiit", label: "HIIT / 서킷", met: 9.5 },
+    { key: "yoga", label: "요가 / 필라테스", met: 2.8 },
+    { key: "jumprope", label: "줄넘기", met: 10.0 },
+    { key: "hike", label: "등산", met: 6.5 },
+    { key: "badminton", label: "배드민턴 / 탁구", met: 5.5 }
+  ];
+
+  var exerciseSel = document.getElementById("exercise");
+  EXERCISES.forEach(function (ex) {
+    var opt = document.createElement("option");
+    opt.value = ex.key;
+    opt.textContent = ex.label;
+    exerciseSel.appendChild(opt);
+  });
+  exerciseSel.value = "run";
+
+  var durationInput = document.getElementById("duration");
+  var weightInput = document.getElementById("weight");
+  var heightInput = document.getElementById("height");
+  var burnNumberEl = document.getElementById("burnNumber");
+  var metNoteEl = document.getElementById("metNote");
+  var statProtein = document.getElementById("statProtein");
+  var statCarb = document.getElementById("statCarb");
+  var statTier = document.getElementById("statTier");
+  var statTierBox = document.getElementById("statTierBox");
+  var statBmi = document.getElementById("statBmi");
+  var statBmiLabel = document.getElementById("statBmiLabel");
+  var recHint = document.getElementById("recHint");
+  var cardsEl = document.getElementById("cards");
+
+  function bmiCategory(bmi) {
+    if (bmi < 18.5) return "저체중";
+    if (bmi < 23) return "정상";
+    if (bmi < 25) return "과체중";
+    return "비만";
+  }
+
+  function coupangSearchUrl(query) {
+    return "https://www.coupang.com/np/search?component=&sorter=scoreDesc&q=" + encodeURIComponent(query);
+  }
+
+  function kurlySearchUrl(query) {
+    return "https://www.kurly.com/search?search=" + encodeURIComponent(query);
+  }
+
+  function roundToStep(n, step) {
+    return Math.round(n / step) * step;
+  }
+
+  function externalIcon() {
+    return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"/><path d="M8 7h9v9"/></svg>';
+  }
+
+  function trackRecommend(store, title, exercise, tier) {
+    var version = window.APP_VERSION || "mvp-2.0";
+
+    if (window.dataLayer) {
+      window.dataLayer.push({
+        event: "recommend_click",
+        mvp_version: version,
+        store: store,
+        title: title,
+        exercise: exercise,
+        tier: tier
+      });
+    }
+
+    if (window.gtag) {
+      window.gtag("event", "recommend_click", {
+        mvp_version: version,
+        store: store,
+        title: title,
+        exercise: exercise,
+        tier: tier
+      });
+    }
+  }
+
+  function recommendationsFor(kcal) {
+    var tier, tierLabel, proteinG, carbG, hint;
+    if (kcal < 200) {
+      tier = "low"; tierLabel = "가벼운 보충";
+      proteinG = 12; carbG = 20;
+      hint = "가볍게 태웠다면, 부담 없는 저칼로리 간편식으로 마무리하는 게 좋아요.";
+    } else if (kcal < 500) {
+      tier = "mid"; tierLabel = "균형 회복";
+      proteinG = 22; carbG = 45;
+      hint = "적당히 태웠어요. 단백질과 탄수화물이 고루 들어간 한 끼를 챙기면 좋아요.";
+    } else {
+      tier = "high"; tierLabel = "적극 회복";
+      proteinG = 32; carbG = 70;
+      hint = "많이 태웠네요! 회복을 위해 고단백·고탄수 식단을 준비해 보세요.";
+    }
+
+    var pTarget = roundToStep(proteinG, 5);
+    var cTarget = roundToStep(carbG, 5);
+
+    var cards = [
+      {
+        tag: "단백질 " + pTarget + "g대",
+        title: tier === "low" ? "가볍게 닭가슴살 보충" : "고단백 닭가슴살",
+        desc: "오늘 소모량 기준으로 단백질 " + proteinG + "g에 가까운 보충 식품을 빠르게 찾아보세요.",
+        coupangQuery: (tier === "low" ? "닭가슴살 소포장 단백질 " : "고단백 닭가슴살 단백질 ") + pTarget + "g",
+        kurlyQuery: (tier === "low" ? "저칼로리 닭가슴살 단백질 " : "닭가슴살 단백질 ") + pTarget + "g"
+      },
+      {
+        tag: "단백질 " + pTarget + "g · 탄수 " + cTarget + "g",
+        title: tier === "high" ? "근력 회복용 한끼 도시락" : "균형 잡힌 한끼 도시락",
+        desc: "단백질 " + proteinG + "g, 탄수화물 " + carbG + "g를 고려해 한 끼를 보완하는 추천입니다.",
+        coupangQuery: (tier === "high" ? "고단백 고탄수화물 도시락 단백질 " : "저칼로리 다이어트 도시락 단백질 ") + pTarget + "g 탄수화물 " + cTarget + "g",
+        kurlyQuery: (tier === "high" ? "고단백 도시락 단백질 " : "균형 도시락 단백질 ") + pTarget + "g 탄수화물 " + cTarget + "g"
+      },
+      {
+        tag: "단백질 " + pTarget + "g대",
+        title: tier === "low" ? "저칼로리 단백질 음료" : "프로틴 쉐이크",
+        desc: "식사 전에 빠르게 보충할 수 있는 액상 단백질로 1회 보충용으로 적합해요.",
+        coupangQuery: (tier === "low" ? "저칼로리 프로틴 음료 단백질 " : "프로틴 쉐이크 단백질 ") + pTarget + "g",
+        kurlyQuery: (tier === "low" ? "저칼로리 프로틴 음료 " : "프로틴 쉐이크 ") + pTarget + "g"
+      }
+    ];
+
+    return { tier: tier, tierLabel: tierLabel, proteinG: proteinG, carbG: carbG, hint: hint, cards: cards };
+  }
+
+  function render() {
+    var ex = EXERCISES.filter(function (e) { return e.key === exerciseSel.value; })[0];
+    var minutes = Math.max(1, Math.min(600, Number(durationInput.value) || 0));
+    var weight = Math.max(30, Math.min(200, Number(weightInput.value) || 0));
+    var height = Math.max(120, Math.min(220, Number(heightInput.value) || 0));
+
+    var hours = minutes / 60;
+    var kcal = ex.met * weight * hours;
+    var kcalRounded = Math.round(kcal);
+
+    burnNumberEl.innerHTML = kcalRounded.toLocaleString("ko-KR") + "<span>kcal</span>";
+    metNoteEl.textContent = ex.label + " · MET " + ex.met + " · " + minutes + "분 · " + weight + "kg 기준";
+
+    var heightM = height / 100;
+    var bmi = weight / (heightM * heightM);
+    statBmi.textContent = bmi.toFixed(1);
+    statBmiLabel.textContent = "BMI · " + bmiCategory(bmi);
+
+    var rec = recommendationsFor(kcalRounded);
+    statProtein.textContent = rec.proteinG + "g";
+    statCarb.textContent = rec.carbG + "g";
+    statTier.textContent = rec.tierLabel;
+    statTierBox.className = "stat tier-" + rec.tier;
+    recHint.textContent = rec.hint;
+
+    cardsEl.innerHTML = "";
+    rec.cards.forEach(function (c) {
+      var card = document.createElement("div");
+      card.className = "card";
+      card.innerHTML =
+        '<span class="card-tag">' + c.tag + '</span>' +
+        '<h3>' + c.title + '</h3>' +
+        '<p>' + c.desc + '</p>' +
+        '<div class="cta-group">' +
+        '<a class="shop-button coupang" href="' + coupangSearchUrl(c.coupangQuery) + '" target="_blank" rel="noopener noreferrer" data-store="coupang" data-title="' + c.title + '">운동 후 간편식 쟁여두기 (쿠팡) ' + externalIcon() + '</a>' +
+        '<a class="shop-button kurly" href="' + kurlySearchUrl(c.kurlyQuery) + '" target="_blank" rel="noopener noreferrer" data-store="kurly" data-title="' + c.title + '">운동 후 맞춤 한끼 (마켓컬리) ' + externalIcon() + '</a>' +
+        '</div>';
+
+      card.querySelectorAll(".shop-button").forEach(function (button) {
+        button.addEventListener("click", function () {
+          trackRecommend(button.dataset.store, button.dataset.title, exerciseSel.value, rec.tier);
+        });
+      });
+
+      cardsEl.appendChild(card);
+    });
+  }
+
+  exerciseSel.addEventListener("change", render);
+  durationInput.addEventListener("input", render);
+  weightInput.addEventListener("input", render);
+  heightInput.addEventListener("input", render);
+  render();
+</script>
+</body>
+</html>
